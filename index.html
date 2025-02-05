@@ -9,10 +9,14 @@
             const input = document.getElementById("codes").value;
             const codes = input.split('\n'); // Split by newline
             
-            // Iterate through each code and open a new tab
+            // Iterate through each code, process it and open a new tab
             codes.forEach(function(code) {
                 if (code.trim()) {
-                    const url = `https://www.familysearch.org/en/tree/person/ordinances/${code.trim()}`;
+                    // Remove all non-alphanumeric characters (i.e., dashes or spaces) before formatting
+                    const cleanCode = code.trim().replace(/[^a-zA-Z0-9]/g, '');
+                    // Add the dashes back into the code: first 4 characters, dash, next 3 characters
+                    const formattedCode = cleanCode.slice(0, 4) + '-' + cleanCode.slice(4, 7);
+                    const url = `https://www.familysearch.org/en/tree/person/ordinances/${formattedCode}`;
                     window.open(url, '_blank');
                 }
             });
@@ -21,7 +25,7 @@
 </head>
 <body>
     <h1>Open FamilySearch Ordinances</h1>
-    <textarea id="codes" rows="10" cols="30" placeholder="Enter codes in the format xxxx-xxx, one per line"></textarea>
+    <textarea id="codes" rows="10" cols="30" placeholder="Enter codes (without dashes), one per line"></textarea>
     <br><br>
     <button onclick="openTabs()">Open Tabs</button>
 </body>
