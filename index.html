@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open FamilySearch Tabs</title>
+    <script>
+        function openTabs() {
+            const input = document.getElementById("codes").value;
+            const codes = input.split('\n'); // Split by newline
+            
+            // Iterate through each code and open a new tab
+            codes.forEach(function(code) {
+                if (code.trim()) {
+                    const url = `https://www.familysearch.org/en/tree/person/ordinances/${code.trim()}`;
+                    window.open(url, '_blank');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Open FamilySearch Ordinances</h1>
+    <textarea id="codes" rows="10" cols="30" placeholder="Enter codes in the format xxxx-xxx, one per line"></textarea>
+    <br><br>
+    <button onclick="openTabs()">Open Tabs</button>
+</body>
+</html>
